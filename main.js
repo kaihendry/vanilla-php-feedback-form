@@ -1,11 +1,11 @@
-form.onsubmit = function (e) {
-	// stop the regular form submission
+feedbackform.onsubmit = function (e) {
+	// stop the regular feedbackform submission
 	e.preventDefault();
 
-	// collect the form data while iterating over the inputs
+	// collect the feedbackform data while iterating over the inputs
 	var data = {};
-	for (var i = 0, ii = form.length; i < ii; ++i) {
-		var input = form[i];
+	for (var i = 0, ii = feedbackform.length; i < ii; ++i) {
+		var input = feedbackform[i];
 		if (input.name) {
 			data[input.name] = input.value;
 		}
@@ -13,7 +13,7 @@ form.onsubmit = function (e) {
 	
 	// construct an HTTP request
 	var xhr = new XMLHttpRequest();
-	xhr.open(form.method, form.action, true);
+	xhr.open(feedbackform.method, feedbackform.action, true);
 	xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
 	// send the collected data as JSON
