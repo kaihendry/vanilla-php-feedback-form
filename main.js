@@ -21,7 +21,6 @@ feedbackform.onsubmit = function (e) {
 
 	xhr.onloadend = function () {
 		// TODO: Howto check for 200 response? https://twitter.com/Espen_Antonsen/status/394832041491308544
-		var s = document.getElementById('thing');
-		s.style.display="none";
+		// Change form to say SENT!
 	};
 };

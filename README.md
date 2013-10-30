@@ -1,4 +1,4 @@
-# Simple sane VANILLA PHP feedback form
+## Simple sane VANILLA PHP feedback form
 
 Designed to be used on the **latest browsers**
 
@@ -6,7 +6,7 @@ Designed to be used on the **latest browsers**
 * No legacy support (Microsoft IE)
 * No Jquery
 
-# How to setup a Postfix MTA for a feedback form
+### How to setup a Postfix MTA for a feedback form
 
 You `/etc/postfix/main.cf` should look like:
 
@@ -23,7 +23,7 @@ Now make sure mail gets set to you@example.com:
 	$ grep ^root /etc/postfix/aliases
 	root:           you@example.com
 
-Now lets start her up!
+Now lets start this bloatware up!
 
 	# newaliases
 	# systemctl enable postfix
@@ -31,10 +31,10 @@ Now lets start her up!
 
 Do a test, like so: `echo testing 123 | mail -s Testing root`
 
-# Including the feedback form
+### Including the feedback form
 
 Via PHP: include("form.html");
 
-Via `m4 -PEIinc`: `m4_include(form.html)`
+Or via a [Makefile](http://dabase.com/blog/Makefile_based_static_site_generator/) `m4 -PEIinc`: `m4_include(form.html)`
 
-The form should fit nicely inside the containing parent.
+The feedback form should fit nicely inside the containing parent.
