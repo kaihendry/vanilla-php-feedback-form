@@ -17,9 +17,12 @@ function feedback(feedbackform) {
 	// send the collected data as JSON
 	xhr.send(JSON.stringify(data));
 
-	xhr.onloadend = function () {
-		// TODO: Howto check for 200 response? https://twitter.com/Espen_Antonsen/status/394832041491308544
-		// Change form to say SENT!
+	xhr.onloadend = function () { // TODO: How to check XHR is actually successful?
+		if (xhr.status == 200) {
+		feedbackform.innerHTML = "<h1 style='background-color: green; padding: 1em; border-radius: 5px; color: white;'>Sent!</h1>";
+		} else {
+		feedbackform.innerHTML = "<h1 style='background-color: red; padding: 1em; border-radius: 5px; color: white;'>Failed to send</h1>";
+		}
 	};
 
 	return false;
