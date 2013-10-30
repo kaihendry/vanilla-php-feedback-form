@@ -1,6 +1,6 @@
-feedbackform.onsubmit = function (e) {
-	// stop the regular feedbackform submission
-	e.preventDefault();
+function feedback() {
+
+	// How can I avoid name="feedbackform" to anonymous this?
 
 	// collect the feedbackform data while iterating over the inputs
 	var data = {};
@@ -23,4 +23,6 @@ feedbackform.onsubmit = function (e) {
 		// TODO: Howto check for 200 response? https://twitter.com/Espen_Antonsen/status/394832041491308544
 		// Change form to say SENT!
 	};
-};
+
+	return false;
+}
