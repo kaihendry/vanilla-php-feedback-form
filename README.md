@@ -37,4 +37,4 @@ Via PHP: include("form.html");
 
 Or via a [Makefile](http://dabase.com/blog/Makefile_based_static_site_generator/) `m4 -PEIinc`: `m4_include(form.html)`
 
-The feedback form should fit nicely inside the containing parent.
+The feedback form should fit nicely inside the containing parent. [Bootstrap feedback form demo](http://feedback.dabase.com/eg/)
