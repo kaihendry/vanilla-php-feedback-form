@@ -10,7 +10,7 @@ feedbackform.onsubmit = function (e) {
 			data[input.name] = input.value;
 		}
 	}
-	
+
 	// construct an HTTP request
 	var xhr = new XMLHttpRequest();
 	xhr.open(feedbackform.method, feedbackform.action, true);
@@ -20,6 +20,8 @@ feedbackform.onsubmit = function (e) {
 	xhr.send(JSON.stringify(data));
 
 	xhr.onloadend = function () {
-		console.log("Done");
+		// TODO: Howto check for 200 response? https://twitter.com/Espen_Antonsen/status/394832041491308544
+		var s = document.getElementById('thing');
+		s.style.display="none";
 	};
 };
