@@ -2,9 +2,9 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Feedback</title>
+<title>Feedback demo</title>
 </head>
 <body>
-<?php include("form.html"); ?>
+<?php include("feedback/index.html"); ?>
 </body>
 </html>
