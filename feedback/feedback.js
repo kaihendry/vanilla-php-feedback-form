@@ -1,6 +1,4 @@
-function feedback() {
-
-	// How can I avoid name="feedbackform" to anonymous this?
+function feedback(feedbackform) {
 
 	// collect the feedbackform data while iterating over the inputs
 	var data = {};
