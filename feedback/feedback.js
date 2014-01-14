@@ -11,7 +11,7 @@ function feedback(feedbackform) {
 
 	// construct an HTTP request
 	var xhr = new XMLHttpRequest();
-	xhr.open(feedbackform.method, feedbackform.action, true);
+	xhr.open(feedbackform.method, feedbackform.action);
 	xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
 	// send the collected data as JSON
