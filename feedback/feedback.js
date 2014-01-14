@@ -17,11 +17,18 @@ function feedback(feedbackform) {
 	// send the collected data as JSON
 	xhr.send(JSON.stringify(data));
 
-	xhr.onloadend = function () { // TODO: How to check XHR is actually successful?
+	xhr.onloadend = function () {
 		if (xhr.status == 200) {
-		feedbackform.innerHTML = "<h1 style='background-color: green; padding: 1em; border-radius: 5px; color: white;'>Sent!</h1>";
+			feedbackform.send.value = "Sent!";
+			feedbackform.send.disabled = true;
+			feedbackform.from.disabled = true;
+			feedbackform.msg.disabled = true;
+			feedbackform.send.style.backgroundColor = "green";
+			feedbackform.send.style.color = "white";
 		} else {
-		feedbackform.innerHTML = "<h1 style='background-color: red; padding: 1em; border-radius: 5px; color: white;'>Failed to send</h1>";
+			feedbackform.send.value = "Failed to send";
+			feedbackform.send.style.backgroundColor = "red";
+			feedbackform.send.style.color = "white";
 		}
 	};
 
