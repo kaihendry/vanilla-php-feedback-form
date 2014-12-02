@@ -2,7 +2,7 @@ function feedback(feedbackform) {
 
 	// collect the feedbackform data while iterating over the inputs
 	var data = {};
-	for (var i = 0, ii = feedbackform.length; i < ii; ++i) {
+	for (var i = 0; i < feedbackform.length; i++) {
 		var input = feedbackform[i];
 		if (input.name) {
 			data[input.name] = input.value;
