@@ -4,7 +4,7 @@ function feedback(feedbackform) {
 	var data = {};
 	for (var i = 0; i < feedbackform.length; i++) {
 		var input = feedbackform[i];
-		if (input.name) {
+		if (input.name && input.value) {
 			data[input.name] = input.value;
 		}
 	}
@@ -13,7 +13,6 @@ function feedback(feedbackform) {
 	var xhr = new XMLHttpRequest();
 	xhr.open(feedbackform.method, feedbackform.action);
 	xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
 	// send the collected data as JSON
 	xhr.send(JSON.stringify(data));
 
@@ -23,12 +22,10 @@ function feedback(feedbackform) {
 			feedbackform.send.disabled = true;
 			feedbackform.from.disabled = true;
 			feedbackform.msg.disabled = true;
-			feedbackform.send.style.backgroundColor = "green";
-			feedbackform.send.style.color = "white";
+			feedbackform.send.className = "success";
 		} else {
 			feedbackform.send.value = "Failed to send";
-			feedbackform.send.style.backgroundColor = "red";
-			feedbackform.send.style.color = "white";
+			feedbackform.send.className = "fail";
 		}
 	};
 
