@@ -1,8 +1,7 @@
 <?php
 switch ($_SERVER['HTTP_ORIGIN']) {
 	case "http://dabase.com":
-	case "http://feedback.dabase.com":
-	case "http://natalian":
+	case "https://feedback.dabase.com":
 	case "https://natalian.org":
 		header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
 		break;
@@ -27,7 +26,7 @@ $input = json_decode(file_get_contents('php://input'), true);
 
 if(empty($input["msg"])) { http_response_code(400); die(); }
 
-$message = serialize($input["msg"]) . "\n\n--\n" . print_r($_SERVER, true);
+$message = json_encode($input, JSON_PRETTY_PRINT) . "\n\n--\n" . json_encode($_SERVER, JSON_PRETTY_PRINT);
 
 if(empty($input["from"]) || !filter_var($input["from"], FILTER_VALIDATE_EMAIL)) {
 	mail('hendry+feedback@iki.fi', $subject, $message);
