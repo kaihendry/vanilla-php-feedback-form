@@ -15,13 +15,11 @@ function feedback(feedbackform) {
 	xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 	// send the collected data as JSON
 	xhr.send(JSON.stringify(data));
+	feedbackform.send.disabled = true;
 
 	xhr.onloadend = function () {
 		if (xhr.status == 200) {
 			feedbackform.send.value = "Sent!";
-			feedbackform.send.disabled = true;
-			feedbackform.from.disabled = true;
-			feedbackform.msg.disabled = true;
 			feedbackform.send.className = "success";
 		} else {
 			feedbackform.send.value = "Failed to send";

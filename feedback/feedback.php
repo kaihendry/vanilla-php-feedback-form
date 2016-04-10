@@ -6,11 +6,11 @@ switch ($_SERVER['HTTP_ORIGIN']) {
 		header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
 		break;
 	default:
+		http_response_code(400);
 		die("Bad origin: " . $_SERVER['HTTP_ORIGIN']);
 }
 
 
-// Access-Control headers are received during OPTIONS requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
 		header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
@@ -29,9 +29,14 @@ if(empty($input["msg"])) { http_response_code(400); die(); }
 $message = json_encode($input, JSON_PRETTY_PRINT) . "\n\n--\n" . json_encode($_SERVER, JSON_PRETTY_PRINT);
 
 if(empty($input["from"]) || !filter_var($input["from"], FILTER_VALIDATE_EMAIL)) {
-	mail('hendry+feedback@iki.fi', $subject, $message);
+	if (!mail('hendry+feedback@iki.fi', $subject, $message)) {
+		http_response_code(400);
+	}
 } else {
 	$headers = 'From: ' . $input["from"];
-	mail('hendry+feedback@iki.fi', $subject, $message, $headers);
+	if (!mail('hendry+feedback@iki.fi', $subject, $message, $headers)) {
+		http_response_code(400);
+	}
+
 }
 ?>
