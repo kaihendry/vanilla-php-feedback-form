@@ -1,31 +1,22 @@
 function feedback(feedbackform) {
 
-	// collect the feedbackform data while iterating over the inputs
-	var data = {};
-	for (var i = 0; i < feedbackform.length; i++) {
-		var input = feedbackform[i];
-		if (input.name && input.value) {
-			data[input.name] = input.value;
+	const data = {};
+
+	for (let input of feedbackform) {
+		if (input.name !== "" && input.value !== "") {
+			data[input.name] = input.value
 		}
 	}
 
-	// construct an HTTP request
-	var xhr = new XMLHttpRequest();
-	xhr.open(feedbackform.method, feedbackform.action);
-	xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-	// send the collected data as JSON
-	xhr.send(JSON.stringify(data));
-	feedbackform.send.disabled = true;
+	console.log(data);
 
-	xhr.onloadend = function () {
-		if (xhr.status == 200) {
-			feedbackform.send.value = "Sent!";
-			feedbackform.send.className = "success";
+	fetch(feedbackform.action, { method: "POST", body: JSON.Stringify(data) }).then(function(res){
+		if (res.ok) {
+			console.log(res);
 		} else {
-			feedbackform.send.value = "Failed to send";
-			feedbackform.send.className = "fail";
+			console.log("error", res);
 		}
-	};
+	});
 
 	return false;
 }
