@@ -3,6 +3,7 @@
 Designed to be used on the **latest browsers**
 
 * Minimal
+* Can work without Javascript !
 * No legacy support (Microsoft IE)
 * No Jquery
 
@@ -36,7 +37,3 @@ Do a test, like so: `echo testing 123 | mail -s Testing root`
 Via PHP:
 
 	<?php include("feedback/index.html"); ?>
-
-Or via a [Makefile](http://dabase.com/blog/Makefile_based_static_site_generator/) `m4 -PEIinc`: `m4_include(feedback/index.html)`
-
-The feedback form should fit nicely inside the containing parent. [Bootstrap feedback form demo](http://feedback.dabase.com/eg/)
