@@ -1,17 +1,17 @@
 function feedback(feedbackform) {
 
-	const data = {};
+	const formData = new FormData();
 
 	for (let input of feedbackform) {
 		if (input.name && input.value) {
-			data[input.name] = input.value
+			formData.append(input.name, input.value);
 		}
 	}
 
 	feedbackform.send.value = "Sending...";
 	feedbackform.send.disabled = true;
 
-	fetch(feedbackform.action, { method: "POST", body: JSON.stringify(data) }).then(function(res){
+	fetch(feedbackform.action, { method: "POST", body: formData }).then(function(res){
 		if (res.ok) {
 			console.log(res);
 			feedbackform.send.value = "Sent!";

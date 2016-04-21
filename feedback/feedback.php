@@ -22,18 +22,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 $subject = 'Feedback from ' . $_SERVER['REMOTE_ADDR'] . ' ' . $_SERVER['HTTP_REFERER'];
-$input = json_decode(file_get_contents('php://input'), true);
 
-if(empty($input["msg"])) { http_response_code(400); die(); }
+if(empty($_POST["msg"])) { http_response_code(400); die(); }
 
-$message = json_encode($input, JSON_PRETTY_PRINT) . "\n\n--\n" . json_encode($_SERVER, JSON_PRETTY_PRINT);
+$message = json_encode($_POST, JSON_PRETTY_PRINT) . "\n\n--\n" . json_encode($_SERVER, JSON_PRETTY_PRINT);
 
-if(empty($input["from"]) || !filter_var($input["from"], FILTER_VALIDATE_EMAIL)) {
+if(empty($_POST["from"]) || !filter_var($_POST["from"], FILTER_VALIDATE_EMAIL)) {
 	if (!mail('hendry+feedback@iki.fi', $subject, $message)) {
 		http_response_code(400);
 	}
 } else {
-	$headers = 'From: ' . $input["from"];
+	$headers = 'From: ' . $_POST["from"];
 	if (!mail('hendry+feedback@iki.fi', $subject, $message, $headers)) {
 		http_response_code(400);
 	}
