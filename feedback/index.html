@@ -5,6 +5,8 @@
 .fb input[type=email] { width: 100%; border: solid 2px black; padding: 10px; transition: border 0.3s; display: block; }
 .fb textarea { width: 100%; border-style: inset; padding: 10px; border-width: 2px; }
 .fb footer { font-size: x-small; display: inline; }
+input[type=submit]:disabled  { animation: glow 3s ease-in-out infinite; }
+@keyframes glow { 50% { box-shadow: 0 0 5px #aaf; } }
 </style>
 
 <form onsubmit="return feedback(this);" class=fb action="/feedback/feedback.php" method="post">
