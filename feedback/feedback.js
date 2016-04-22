@@ -15,7 +15,6 @@ function feedback(feedbackform) {
 		if (res.ok) {
 			console.log(res);
 			feedbackform.send.value = "Sent!";
-			feedbackform.send.className = "success";
 		} else {
 			console.log("error", res);
 			feedbackform.send.value = "Error, try again";
