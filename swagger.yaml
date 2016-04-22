@@ -1,0 +1,29 @@
+swagger: "2.0"
+info:
+  version: "0.2"
+  title: "Feedback API"
+host: feedback.dabase.com
+schemes:
+  - https
+paths:
+  /feedback/feedback.php:
+    post:
+      consumes:
+        - multipart/form-data
+      description: Send some feedback
+      parameters:
+        - name: email
+          in: formData
+          type: string
+          format: email
+          description: Email address of feedback giver
+        - name: msg
+          in: formData
+          type: string
+          required: true
+          description: Feedback message
+      responses:
+        200:
+          description: Feedback was sent
+        400:
+          description: Feedback failed to send

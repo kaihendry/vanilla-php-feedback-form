@@ -1,6 +1,5 @@
 <?php
 
-
 function failzone($msg) {
 		http_response_code(400);
 		die($msg);
@@ -8,6 +7,7 @@ function failzone($msg) {
 
 switch ($_SERVER['HTTP_ORIGIN']) {
 	case "http://dabase.com":
+	case "http://editor.swagger.io":
 	case "https://feedback.dabase.com":
 	case "https://natalian.org":
 		header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
