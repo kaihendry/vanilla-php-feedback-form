@@ -6,7 +6,7 @@ Requires=docker.service
 [Service]
 ExecStartPre=-/usr/bin/docker kill feedback
 ExecStartPre=/usr/bin/docker pull hendry/feedback
-ExecStart=/usr/bin/docker run --publish 4000:2015 --env-file /home/core/env.list --name feedback --rm hendry/feedback
+ExecStart=/usr/bin/docker run --env-file /home/core/env.list --name feedback --rm hendry/feedback
 
 [Install]
 WantedBy=multi-user.target

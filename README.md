@@ -1,4 +1,4 @@
-## Simple sane VANILLA PHP feedback form
+# Simple sane VANILLA PHP feedback form
 
 Designed to be used on the **latest browsers**
 
@@ -6,7 +6,7 @@ Designed to be used on the **latest browsers**
 * Can work without Javascript !
 * No Jquery
 
-## Docker
+# Docker
 
 Be sure to change the FROM address to a sender address that is verified in your Amazon SES
 account:
@@ -20,3 +20,11 @@ account:
 And save as `env.list`, then:
 
 	docker run --rm --env-file env.list -it -p 2015:2015 hendry/feedback
+
+# Caddy integration
+
+	feedback.dabase.com {
+		tls foo@example.com
+		proxy / feedback:2015
+	}
+
