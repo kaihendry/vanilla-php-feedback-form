@@ -1,11 +1,14 @@
 <?php
 
+require "sesmail.php";
+
 function failzone($msg) {
 		http_response_code(400);
 		die($msg);
 }
 
 switch ($_SERVER['HTTP_ORIGIN']) {
+	case "http://0.0.0.0:2015":
 	case "http://dabase.com":
 	case "https://feedback.dabase.com":
 	case "https://up.dabase.com":
@@ -15,7 +18,6 @@ switch ($_SERVER['HTTP_ORIGIN']) {
 	default:
 		failzone("Bad origin: " . $_SERVER['HTTP_ORIGIN']);
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
@@ -33,26 +35,21 @@ if(empty($_POST["msg"])) { failzone("No message"); }
 
 $message = $_POST["msg"] . "\n\n--\n" . json_encode($_POST, JSON_PRETTY_PRINT) . "\n\n--\n" . json_encode($_SERVER, JSON_PRETTY_PRINT);
 
-if(empty($_POST["from"]) || !filter_var($_POST["from"], FILTER_VALIDATE_EMAIL)) {
-	if (!mail('hendry+feedback@iki.fi', $subject, $message)) {
-		failzone("Failed to send mail");
-	}
-} else {
-	$headers = 'From: ' . $_POST["from"];
-	if (!mail('hendry+feedback@iki.fi', $subject, $message, $headers)) {
-		failzone("Failed to send mail");
-	}
-
+try {
+	$messageId = sesmail($subject, $message, $_POST["from"]);
+} catch (Exception $e) {
+	failzone($e->getMessage()."\n");
 }
+
 ?>
 <!DOCTYPE html>
-<html>
+<html lang=en>
 <head>
 <meta charset="utf-8" />
 <meta name=viewport content="width=device-width, initial-scale=1">
 <title>Thank you</title>
 </head>
 <body>
-<h1>👍Thank you for your feedback!</h1>
+<h1>👍Thank you for your feedback!</h1><p>Reference: <?=$messageId;?></p>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang=en>
 <head>
 <meta charset="utf-8" />
 <title>Feedback demo</title>
-<meta name="viewport" content="minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+<meta name=viewport content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
