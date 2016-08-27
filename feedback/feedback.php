@@ -7,18 +7,6 @@ function failzone($msg) {
 		die($msg);
 }
 
-switch ($_SERVER['HTTP_ORIGIN']) {
-	case "http://0.0.0.0:2015":
-	case "http://dabase.com":
-	case "https://feedback.dabase.com":
-	case "https://up.dabase.com":
-	case "https://natalian.org":
-		header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
-		break;
-	default:
-		failzone("Bad origin: " . $_SERVER['HTTP_ORIGIN']);
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
 		header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
