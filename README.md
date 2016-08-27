@@ -4,7 +4,6 @@ Designed to be used on the **latest browsers**
 
 * Minimal
 * Can work without Javascript !
-* No legacy support (Microsoft IE)
 * No Jquery
 
 ## Docker
