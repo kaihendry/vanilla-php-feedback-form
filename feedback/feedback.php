@@ -7,8 +7,8 @@ function failzone($msg) {
 
 switch ($_SERVER['HTTP_ORIGIN']) {
 	case "http://dabase.com":
-	case "http://editor.swagger.io":
 	case "https://feedback.dabase.com":
+	case "https://up.dabase.com":
 	case "https://natalian.org":
 		header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
 		break;
@@ -31,7 +31,7 @@ $subject = 'Feedback from ' . $_SERVER['REMOTE_ADDR'] . ' ' . $_SERVER['HTTP_REF
 
 if(empty($_POST["msg"])) { failzone("No message"); }
 
-$message = json_encode($_POST, JSON_PRETTY_PRINT) . "\n\n--\n" . json_encode($_SERVER, JSON_PRETTY_PRINT);
+$message = $_POST["msg"] . "\n\n--\n" . json_encode($_POST, JSON_PRETTY_PRINT) . "\n\n--\n" . json_encode($_SERVER, JSON_PRETTY_PRINT);
 
 if(empty($_POST["from"]) || !filter_var($_POST["from"], FILTER_VALIDATE_EMAIL)) {
 	if (!mail('hendry+feedback@iki.fi', $subject, $message)) {
