@@ -1,41 +1,28 @@
 <?php
 
-// if(empty($_POST["from"]) || !filter_var($_POST["from"], FILTER_VALIDATE_EMAIL)) {
 require '../vendor/autoload.php';
 use Aws\Ses\SesClient;
 
 function sesMail($subject, $message, $replyto) {
-
-$fromAdr = getenv("FROM");
 
 $SesClient = new Aws\Ses\SesClient([
 	'version'   =>  'latest',
 	'region'    =>  getenv("REGION")
 ]);
 
-$result = $SesClient->sendEmail([
-	'Destination' => [
-		'ToAddresses' => [
-			getenv("TO")
-		],
-	],
-	'Message' => [
-		'Body' => [
-			'Text' => [
-				'Charset' => 'UTF-8',
-				'Data' => $message,
-			],
-		],
-		'Subject' => [
-			'Charset' => 'UTF-8',
-			'Data' => $subject,
-		],
-	],
-	'ReplyToAddresses' => [$replyto],
-	'ReturnPath' => $fromAdr,
-	'Source' => $fromAdr,
-]);
+$msg = array();
+$msg['Source'] = getenv("FROM");
+$msg['Destination']['ToAddresses'][] = getenv("TO");
+$msg['Message']['Subject']['Data'] = $subject;
+$msg['Message']['Subject']['Charset'] = "UTF-8";
+$msg['Message']['Body']['Text']['Data'] = $message;
+$msg['Message']['Body']['Text']['Charset'] = "UTF-8";
 
+if(!empty($replyto) && filter_var($replyto, FILTER_VALIDATE_EMAIL)) {
+	$msg['ReplyToAddresses'][] = $replyto;
+}
+
+$result = $SesClient->sendEmail($msg);
 return $result['MessageId'];
 
 }
