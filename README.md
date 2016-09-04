@@ -1,5 +1,7 @@
 # Simple sane VANILLA PHP feedback form
 
+DEPRECATED in favour of [AWS Lambda & API Gateway](https://www.youtube.com/watch?v=Wy7g-xPhnYQ)
+
 Designed to be used on the **latest browsers**
 
 * Minimal
